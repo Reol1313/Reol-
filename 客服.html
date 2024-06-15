@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客服对话</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* background-color: #f2f2f2; */
+            background-size: cover;
+            background-image: url(./img/客服背景2.jpg);
+        }
+        .chat-container {
+            position: relative;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .chat-header {
+            background-color: rgb(201, 72, 72);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .chat-messages {
+            padding: 20px;
+            height: 600px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .message:last-child {
+            margin-bottom: 0;
+        }
+        .message.from-user {
+            text-align: right;
+        }
+        .message.from-user .message-bubble {
+            background-color: rgb(201, 72, 72);
+            color: #fff;
+        }
+        .message.from-agent .message-bubble {
+            background-color: #e5e5ea;
+            color: #000;
+        }
+        .message-bubble {
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            max-width: 70%;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e5e5ea;
+        }
+        .chat-input input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        .chat-input button {
+            padding: 8px 15px;
+            background-color: rgb(201, 72, 72);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .SPAN1{
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        }
+        a{
+            color: #000;
+            text-decoration: none;
+        }
+        .FH{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="chat-container">
+        <div class="FH"><a style="color: white;" href="./欢迎页面.html">返回</a> </div>
+        <div class="chat-header">
+            客服对话
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message from-agent">
+                <div class="message-bubble">
+                    欢迎！我是您的智能客服IKUN <br> 我可以为您提供什么帮助？ <br>
+                     <span class="SPAN1"><a href=""> 1.如何申请退款?</a></span><br>
+                     <span class="SPAN1"><a href=""> 2.卖家不发货怎么办</a></span><br>
+                     <span class="SPAN1"><a href=""> 3.退款或售后成功后怎么办</a></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="在此输入您的消息...">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var input = document.querySelector('.chat-input input[type="text"]');
+            var message = input.value.trim();
+            if (message !== '') {
+                var messagesContainer = document.getElementById('chat-messages');
+                var messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', 'from-user');
+                messageDiv.innerHTML = '<div class="message-bubble">' + message + '</div>';
+                messagesContainer.appendChild(messageDiv);
+                input.value = '';
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                // 模拟客服回复（实际应用中应替换为与后端通信）
+                setTimeout(function() {
+                    var responseDiv = document.createElement('div');
+                    responseDiv.classList.add('message', 'from-agent');
+                    responseDiv.innerHTML = '<div class="message-bubble">好的，我来帮您查看一下。</div>';
+                    messagesContainer.appendChild(responseDiv);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>

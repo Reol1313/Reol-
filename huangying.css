@@ -1,0 +1,274 @@
+.T1{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-weight: bold;
+  font-size: 45px;
+  /* width: 400px; */
+  display: block;
+  color: aliceblue;
+  text-shadow: 2px 2px 5px rgb(201, 72, 72);
+}
+.T2{
+  position: absolute;
+  left: 160px;
+  top: 40px;
+  text-shadow: 2px 2px 5px rgb(201, 72, 72);
+  font-weight: bold;
+  font-size: 20px;
+  color: aliceblue;
+  /* width: 400px; */
+  display: block;
+}
+.ZXBOX{
+  color: white;
+  position: absolute;
+  right: 30px;
+  top: 10px;
+
+}
+.ZXBUTTON{
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  width: 50px;
+  height: 30px;
+  color: rgb(201, 72, 72);
+}
+/* 头部 */
+ul.nav{
+    margin: 0 auto;
+    display: flex;
+}
+ul.nav li{
+    flex: 1;
+    width: 100px;
+    list-style: none;
+    padding: 10px;
+    text-align: center;
+    line-height: 35px;
+
+}
+ul.nav li a{
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    padding:10px; ;
+    color:rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+ul.nav li a:hover,ul.nav li a.current{
+    color: #007cc4;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+#TITLEO{
+    height: 940px;
+    background-color: rgb(255, 255, 255);
+}
+.TITLE_LINK{
+    position: absolute;
+    left: 700px;
+    top: 30px;
+}
+.DIV_SPAN{
+    font-size: 25px;
+    font-weight: bold;
+}
+/* 头部css */
+.TITLET{
+    position: relative;
+    height: 100px;
+    /* padding-top: 10px; */
+    
+	  background-position: center;
+    background-image: url(./img/276231e9da17865.jpg);
+    /* background: linear-gradient(to bottom, rgba(107, 175, 240, 0.5), rgb(129, 129, 129)); */
+    box-shadow: 2px 5px  5px black;
+    }
+.P1NAME{
+    font-size: 18px;
+    font-weight: bold;
+}
+.TWO-CON{
+      padding-top: 80px;
+      height: 150px;
+      background-color: rgb(255, 255, 255);
+}
+.THREE-CON{
+    height: 600px;
+    background-color: bisque;
+}
+.FOUR-CON{
+    display: block;
+    margin: auto;
+    width: 95%;
+    height: 250px;
+    background-color: rgb(255, 255, 255);
+}
+
+/* 统计 */
+.el-statistic__head{
+  color: rgb(37, 37, 37) !important;
+  font-size: 30px !important;
+  font-weight: bold ;
+}
+
+.el-statistic__number {
+  color: rgb(255, 72, 0) !important;
+  font-size: 35px !important;
+  /* font-weight: bold ; */
+}
+
+/* 第三行 分类 */
+.FL_Title{
+  font-weight: bold;
+  font-size: 17px;
+}
+/* 分类的标题 */
+.T3{
+  position: absolute;
+  /* margin-bottom: 40px; */
+  text-align: center;
+  left: 43%;
+  top: -70px; /* 初始位置在底部之外 */
+  opacity: 0; /* 初始透明度为0 */
+  transition: top 1.75s ease, opacity 2s ease; /* 添加过渡效果 */
+}
+.T32{
+  position: absolute;
+  /* margin-bottom: 40px; */
+  text-align: center;
+  left: 43%;
+  top: -70px; /* 初始位置在底部之外 */
+  opacity: 0; /* 初始透明度为0 */
+  transition: top 1.75s ease, opacity 2s ease; /* 添加过渡效果 */
+}
+.FL_SPAN1{
+  font-size: 60px;
+  font-weight: bold;
+}
+.FL_SPAN2{
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(65, 65, 65);
+}
+#container2{
+  height: 350px; /* 为了演示滚动效果，页面需要足够长 */
+  position: relative;
+  /* background: rgb(243, 175, 175); */
+}
+.imageContainer2 {
+  left: 2.5%;
+  position: absolute;
+  top: -160px; /* 初始位置在底部之外 */
+  opacity: 0; /* 初始透明度为0 */
+  transition: top 1.75s ease, opacity 2s ease; /* 添加过渡效果 */
+  display: flex;
+  justify-content: center;
+}
+.movingImage {
+  flex: 1;
+  width: 400px;
+  height: 450px;
+  margin-right: 5px; /* 图片之间的间距 */
+  margin-left: 5px; /* 图片之间的间距 */
+}    
+.IMG2 {
+  
+  width: 350px;
+  height: 350px;
+  
+}  
+/* 轮播图2 */
+/* .el-carousel__item{
+    color: #475669;
+    opacity: 1;
+    line-height: 200px;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n + 1) {
+    background-color: #d3dce6;
+  } */
+
+#el-collapse-head-0{
+  color: #007cc4;
+  font-weight: bold;
+  font-size: 20px;
+}
+#el-collapse-head-1{
+  color: #007cc4;
+  font-weight: bold;
+  font-size: 20px;
+}
+#el-collapse-head-2{
+  color: #007cc4;
+  font-weight: bold;
+  font-size: 20px;
+}
+#el-collapse-head-3{
+  color: #007cc4;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* footer部分 */
+.f_zx{
+  
+  display: flex;
+  justify-content: space-between;
+}
+.f_zx p {
+  margin-left: 20px;
+width: 815px;
+font-size: 18px;
+color: #FFF;
+line-height: 175%;
+}
+
+.f_zx a {
+  margin-right: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+display: block;
+width: 210px;
+height: 60px;
+background: #FFF;
+border-radius: 10px;
+color: rgb(155, 38, 18);
+font-size: 30px;
+text-align: center;
+line-height: 60px;
+}
+.bg_b{
+  position: relative;
+  width: 100%;
+  /* background: #c7901b; */
+  background-image: linear-gradient(to right, #c7901b, rgb(155, 38, 18));
+}
+.footerLeft{
+  position: relative;
+  color: #c0c0c0;
+  margin-left: 20px;
+}
+footer{
+  width: 100%;
+  background: url(./img/图书2.jpg) no-repeat;
+  background-size: cover;
+}
+.footerBox{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+  color: #fff;
+}
+/* .footerBox .footerRight{
+  
+} */

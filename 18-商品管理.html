@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 第一步：引入Vue.js文件 -->
+    <script src="../js/1.js"></script>
+    <link rel="stylesheet" href="../js/index.css">
+    <script src="../js/index.full.js"></script>
+    <script src="../js/axios.js"></script>
+    <script src="../js/index.life.min.js"></script>
+    <link rel="stylesheet" href="./答辩.css">
+</head>
+<style>
+
+</style>
+<body>
+    <!-- 第二部：创建视图容器（显示vue中内容的容器） -->
+    <div class="col-md-12 TITLET" >
+
+        <span class="T1">宜购网</span>
+        <span class="T2">Shopping center</span>
+        
+
+        <div class="TITLE_LINK">
+          <ul class="nav">
+            <li><a href="./欢迎页面.html" >网站首页</a></li>
+            <li><a href="./18-商品管理.html" >商品页面</a></li>
+            <li><a href="./cart.html">购物车</a></li>
+            <li><a href="./个人信息主页.html">我的信息</a></li>
+            <li><a href="">关于其他</a></li>
+            <li><a href="./客服.html">联系客服</a></li>
+        </ul>  
+        </div>
+       
+    </div>
+
+    <div class="header">
+        <p class="Header_H1">商品列表</p>
+        
+    </div>
+      
+    <!-- 轮播图 -->
+
+
+
+    <div id="main">
+        
+        <div class="sousuo">
+            <input class="srk" type="text" v-model="content" placeholder="请输入">
+        </div>
+
+        <div :id="item.goods_id" @click="openDeailPanel" class="goods" v-for="item in goodsData">
+            <img width="100%" :src="item.img_big_logo" alt="">
+            <div class="price">
+                <div class="current">
+                    <div style="color: aliceblue;font-weight: bolder;text-align:center;">现价:{{item.current_price}}</div>
+                    <div style="color: gray;text-decoration: line-through;text-align: center;">原价:{{item.price}}</div>
+                </div>
+                <div class="sale">
+                    <div v-if="item.is_hot">热销中</div>
+                    <div v-if="item.is_sale">折扣中</div>
+                </div>
+                
+            </div>
+            <!-- 购物车 -->
+            <div :id="item.goods_id" v-on:click.stop="addCart" class="cart">
+                
+                <el-icon style="font-size: 25px;">
+                  <ShoppingCartFull />
+                </el-icon>
+            </div>
+            <div class="title">{{item.title}}</div>
+        </div>
+
+        <el-dialog v-model="dialogVisible" title="商品详情" width="500">
+            <img width="450px" :src="info.img_big_logo" alt="">
+            <div>{{info.title}}</div>
+            <div style="text-align: center;margin-top: 30px;">-----商品介绍-----</div>
+            <div v-html="info.goods_introduce"></div>
+        </el-dialog>
+    </div>
+
+    <script>
+        // 第三部：创建vue应用实例
+        const app = Vue.createApp({
+            // 第四部：创建变量
+            data(){
+                return{
+                   dialogVisible:false,
+                   goodsData:[],
+                   info:{},
+                   content: '',
+                   
+                }
+            },
+            methods:{
+                openDeailPanel(events){
+                    this.dialogVisible = true
+                    console.log(events.currentTarget.id)
+                    var id = events.currentTarget.id
+                    var that = this
+                    axios.get("http://localhost:8888/goods/item?id=" + id).then(function(res){
+                        console.log(res)
+                        that.info = res.data.info
+                    })
+                },
+                addCart(events) {
+                this.dialogVisible = false
+                console.log(events.currentTarget.id)
+                var goodsId = events.currentTarget.id
+                const { userid, token } = localStorage
+                console.log(userid)
+                console.log("1111111");
+                const data = { id: userid, goodsId: goodsId }
+                axios.post("http://localhost:8888/cart/add", data, {
+                    headers: { "Content-Type": 'application/x-www-form-urlencoded', "authorization": token }
+                }).then(function (res) {
+                    console.log(res)
+                    if (res.data.code == 1) {
+                    console.log("22222");
+                    ElMessage.success(res.data.message)
+                    }
+                })
+                },
+
+            },
+            watch: {
+                content(newdata, olddata){
+                    console.log(newdata)
+                    var that = this
+                axios.get("http://localhost:8888/goods/list?search="+ newdata).then(function(res){
+                    console.log(res)
+                    that.goodsData = res.data.list
+                })
+                }
+            },
+            mounted(){
+                var that = this
+                axios.get("http://localhost:8888/goods/list?pagesize=40").then(function(res){
+                    console.log(res)
+                    that.goodsData = res.data.list
+                })
+            }
+        })
+    app.use(ElementPlus)
+    // 第五步：挂载应用实例，让vue中的变量和组件在视图中显示
+
+    app.mount("#main")
+    app.component('shoppingcartfull', ElementPlusIconsVue.ShoppingCartFull)
+    </script>
+</body>
+</html>

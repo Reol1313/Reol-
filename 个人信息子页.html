@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./个人信息.css">
+
+   <!-- elementplus是基于vue，所以先引入vue.js文件 -->
+   <script src="../js/1.js"></script>
+   <!-- elementplus中的样式文件 -->
+   <link rel="stylesheet" href="../js/index.css">
+      <!-- elementplus中的js文件 -->
+   <script src="../js/index.full.js"></script>
+   <script src="../js/axios.js"></script>
+   <style>
+     /* 头部 */
+    .TITLE{
+      position:relative; 
+      height: 200px;
+      background-color: beige;
+      background-image: url(./img/1.jpg);
+    }
+    .TX1{
+      margin-left: 50px;
+      margin-top: 50px;
+    }
+    .NAME{
+      position: absolute;
+      top: 80px;
+      left: 200px;
+      font-size: 30px;
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+    }
+    .NAME2{
+      position: absolute;
+      top: 125px;
+      left: 205px;
+      font-size: 20px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.8);
+      
+    }
+    .ZHUXIAO{
+      position: absolute;
+      right: 30px;
+      top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 150px;
+      height: 60px;
+    }
+    .ZHUXIAO2{
+      position: absolute;
+      right: 200px;
+      top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 150px;
+      height: 60px;
+    }
+    /* 内容 */
+    .CONTENT{
+      text-align: center;
+      font-weight: bold;
+      font-size: 15px;
+      border: 0.25px solid rgb(156, 156, 156);
+      height: 80px;
+      width: 100%;
+      background-color: rgb(240, 240, 240);
+    }
+    .CONTENT2{
+      border: 0.25px solid rgb(156, 156, 156);
+      /* display: flex; */
+      height: 450px;
+      width: 100%;
+      background-color: rgb(240, 240, 240);
+    }
+
+    #DIV1{
+    padding-top: 30px;
+    
+}
+.age{
+  position: absolute;
+      top: 160px;
+      left: 200px;
+      font-size: 30px;
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+    }
+  .CON_TITLE{
+    position: relative;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    height: 60px;
+    background-color: rgb(0, 99, 156);
+  }
+
+  .CON_TITLE_P{
+    padding-top: 10px;
+    margin-left: 40px;
+    /* margin-top: 40px; */
+  }
+  .CON_TITLE_DIV{
+    color: rgb(228, 231, 231);
+    font-size: 20px;
+    position: absolute;
+    right: 30px;
+    top: 15px;
+  }
+   </style>
+
+
+</head>
+<body>
+  <div id="main">
+      <div class="TITLE">
+          <!-- 头像 -->
+          <el-button @click="XGbutton" type="primary" class="ZHUXIAO">修改个人资料</el-button>
+          <el-button @click="XGbutton2" type="primary" class="ZHUXIAO2">修改密码</el-button>
+          <div class="Avatar"><el-avatar :size="120" class="TX1" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/></div>
+          <div class="NAME">{{info.username}}</div>
+          <div class="age">{{info.age}}</div>
+          <div class="NAME2">{{info.nickname}}</div>
+          
+      </div>
+      <div class="CONTENT">
+
+          <div class="row" id="DIV1" >
+            <div class="col-md-3">
+              待付款： {{0}} 
+            </div>
+            <div class="col-md-3">
+              代发货： {{0}}
+            </div>
+            <div class="col-md-3">
+              待收货： {{0}}
+            </div>
+            <div class="col-md-3">
+              待评价： {{0}}
+            </div>
+
+      </div>
+      </div>
+
+      <!-- 猜您喜欢 -->
+      <br>
+      <div class="CONTENT2">
+          <div class="CON_TITLE">
+             <p class="CON_TITLE_P">猜你喜欢</p>
+             <div class="CON_TITLE_DIV">换一批</div>
+            </div>
+
+              <!-- 主体 -->
+
+          <div class="container">
+            <div class="card" id="OneImg">
+                <div class="content">
+                    <h2>店铺活动¥9.9起</h2>
+                    <p>蓝莓岩烧吐司面包厚切肉松乳酪早餐面包欧包整箱代餐健康零食品</p>
+                    <button>查看更多</button>
+                </div>
+            </div>
+            <div class="card" id="TwoImg">
+                <div class="content">
+                    <h2>掌柜推荐¥119.9</h2>
+                    <p>优形鸡胸肉开袋即食低脂速食鸡肉零食高蛋白轻食鸡肉食品饱腹代餐</p>
+                    <button>查看更多</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h2>¥3758起</h2>
+                    <p>Apple/苹果 AirPods Max 头戴降噪耳机 airpodsmax 掌柜推荐</p>
+                    <button>查看更多</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h2>新品促销¥119.6起</h2>
+                    <p>葵珍洽洽恰恰内蒙原味大瓜子河套特产葵花籽炒货零食188g 掌柜推荐</p>
+                    <button>查看更多</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h2>新品促销 ¥42.8起</h2>
+                    <p>超Q方便面 泡面整箱 混搭老坛酸菜 红烧牛肉面 速食夜宵即速食干脆面</p>
+                    <button>查看更多</button>
+                </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                  <h2>新品促销¥78.8起</h2>
+                  <p>OGORUS无线鼠标 蓝牙静音笔记本电脑游戏电竞可充电宏编程无限滑鼠 掌柜推荐</p>
+                  <button>查看更多</button>
+              </div>
+          </div>
+          <div class="card">
+            <div class="content">
+                <h2>新品抢购¥209起</h2>
+                <p>zbt免插卡随身wifi无线移动wi-fi 三网切换全国通用千兆网络 4g路由器</p>
+                <button>查看更多</button>
+            </div>
+        </div>
+            
+          </div>
+      
+          
+
+      </div>
+      <!-- 修改个人信息弹窗 -->
+      <el-dialog
+    v-model="dialogVisible"
+    title="Tips"
+    width="500"
+   
+  >
+  <el-form ref="form" :rules="rules" :model="user" label-width="60" style="max-width: 600px">
+    <!-- 表单的第一项el-form-item -->
+    <el-form-item label="id" >
+      <el-input v-model="info.id" disabled/>
+    </el-form-item>
+    <el-form-item label="age" >
+      <el-input v-model="info.age" />
+    </el-form-item>
+    <el-form-item label="昵称" >
+      <el-input v-model="info.nickname" />
+    </el-form-item>
+  </el-form>
+
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="updateInfo">
+          确定
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
+      <!-- 修改个人信息弹窗 -->
+
+     <!-- 修改密码 -->
+     <el-dialog
+     v-model="dialogVisible1"
+     title="修改密码"
+     width="500"
+    
+   >
+   <el-form ref="form" :rules="rules" :model="user" label-width="60" style="max-width: 600px">
+     <!-- 表单的第一项el-form-item -->
+     <el-form-item label="id" >
+       <el-input v-model="info.id" />
+     </el-form-item>
+     <el-form-item label="旧密码" >
+       <el-input v-model="info.oldPassword" />
+     </el-form-item>
+     <el-form-item label="新密码" >
+       <el-input v-model="info.newPassword" />
+     </el-form-item>
+     <el-form-item label="重复新密码" >
+       <el-input v-model="info.rNewPassword" />
+     </el-form-item>
+   </el-form>
+ 
+     <template #footer>
+       <div class="dialog-footer">
+         <el-button @click="dialogVisible = false">取消</el-button>
+         <el-button type="primary" @click="updateInfo1">
+           确定
+         </el-button>
+       </div>
+     </template>
+   </el-dialog>
+
+
+   </div>
+
+
+
+  <script>
+
+    const {ElMessage} = ElementPlus
+    const app = Vue.createApp({
+      data(){
+        return{
+          dialogVisible1:false,
+          dialogVisible:false,
+          info:{}
+        }
+      },
+      mounted(){
+        var that=this
+        // 拿到存的用户id和token
+        const{token,userid}=localStorage
+        console.log(token,userid)
+        if(userid==null){
+          ElMessage.error('亲~请登录后再查询个人信息偶')
+        }
+        axios.get("http://localhost:8888/users/info?id="+userid,
+              {headers:{"Content-Type":'application/x-www-form-urlencoded',"authorization":token}}
+            ).then(function (res) {
+                console.log(res)
+                // 将接口中的数据拿到后赋值给data中的info对象
+                that.info=res.data.info
+        })
+      },
+      methods:{
+        XGbutton(){
+          // 让弹窗显示
+         this.dialogVisible = true
+        
+        },
+        XGbutton2(){
+          // 让弹窗显示
+         this.dialogVisible1 = true
+        
+        },
+        // 点击修改个人资料上弹窗的确定按钮，才去请求后台接口
+        updateInfo(){
+          var that=this
+        // 拿到存的用户id和token
+        const{token,userid}=localStorage
+        console.log(token,userid)
+        // 获取修改后的id（不修改）age年龄 一集nickname昵称，封装到data中当参数传递给后台
+        var data = {id:that.info.id,age:that.info.age,nickname:that.info.nickname}
+        axios.post("http://localhost:8888/users/update",data,
+              {headers:{"Content-Type":'application/x-www-form-urlencoded',"authorization":token}}
+            ).then(function (res) {
+                console.log(res)
+                // 将接口中的数据拿到后赋值给data中的info对象
+              //  将弹窗关闭
+                that.dialogVisible = false
+                // 重新查询个人信息
+          })
+        },
+        updateInfo1(){
+          var that=this
+        // 获取修改后的id（不修改）age年龄 一集nickname昵称，封装到data中当参数传递给后台
+        const{token,userid}=localStorage
+        console.log(token,userid)
+
+
+        var id = this.info.id
+        var oldPassword = this.info.oldPassword
+        var newPassword = this.info.newPassword
+        var rNewPassword = this.info.rNewPassword
+        var data = {id:that.info.id,oldPassword:that.info.oldPassword,newPassword:that.info.newPassword,rNewPassword:that.info.rNewPassword}
+        axios.post("http://localhost:8888/users/rpwd",data,
+              {headers:{"Content-Type":'application/x-www-form-urlencoded',"authorization":token}}
+            ).then(function (res) {
+                console.log(res)
+                // 将接口中的数据拿到后赋值给data中的info对象
+              //  将弹窗关闭
+                that.dialogVisible1 = false
+                // 重新查询个人信息
+                if (res.data.code == 0) {
+                  alert(res.data.message)
+                } else if (res.data.code == 1) {
+                  alert("修改密码成功,即将退回到登录")
+                  top.location = "./join.html"
+                }
+        })
+        },
+        
+      },
+      
+    })
+    // 想使用ElementPlus, app.use(ElementPlus)
+    app.use(ElementPlus)
+    app.mount("#main")
+  </script>
+
+
+
+
+
+      <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+      <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+      <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

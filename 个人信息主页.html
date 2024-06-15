@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- element是基于vue的，所以引入VUE文件 -->
+    <script src="../js/1.js"></script>
+    <!-- element的js代码 -->
+    <script src="../js/index.full.js"></script>
+    <!-- element的css代码 -->
+    <link rel="stylesheet" href="../js/index.css">
+
+    <script src="../js/index.life.min.js"></script>
+    
+    <style>
+        .el-container,.el-menu{
+            width: 100%;
+            height: 100%;
+        }
+        .el-header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            width: 100%;
+            height: 100px;
+            background-color: #506479;
+        }
+        .el-aside{
+            height: 100%;
+            height: 800px;
+            background-color: antiquewhite;
+            
+        }
+        .el-main{
+            height: 100%;
+            height: 800px;
+            background-color: rgb(255, 255, 255);
+        }
+        a{
+          text-decoration: none;
+          color: black;
+        }
+        
+        .CK1{
+            /* background-color: #b5c0cc; */
+            
+            border: none;
+        }
+        .CK2{
+            /* background-color: antiquewhite; */
+            width: 100%;
+            
+        }
+
+                /* 头部 */
+ul.nav{
+    margin: 0 auto;
+    display: flex;
+}
+ul.nav li{
+    flex: 1;
+    width: 100px;
+    list-style: none;
+    padding: 10px;
+    text-align: center;
+    line-height: 35px;
+
+}
+ul.nav li a{
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    padding:10px; ;
+    color:rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+ul.nav li a:hover,ul.nav li a.current{
+    color: #007cc4;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+#TITLEO{
+    height: 940px;
+    background-color: rgb(156, 156, 156);
+}
+.TITLE_LINK{
+    position: absolute;
+    left: 700px;
+    top: 30px;
+}
+
+/* 头部css */
+
+  .T1{
+    position: absolute;
+    font-weight: bold;
+    font-size: 45px;
+    left: 30px;
+    display: block;
+    
+  }
+  .T2{
+      position: absolute;
+      font-weight: bold;
+      left: 170px;
+      top: 50px;
+      font-size: 20px;
+      color: aliceblue;
+      display: block;
+     
+  }
+  .HEADER{
+    background-position: center;
+    background-image: url(./img/276231e9da17865.jpg);
+  }
+    </style>
+
+</head>
+<body>
+
+    <div id="main"> 
+        
+
+
+              <el-container>
+                <el-header class="HEADER">
+
+                  <span class="T1">宜购网</span>
+                    <span class="T2">Shopping center</span>
+                    
+
+                    <div class="TITLE_LINK">
+                      <ul class="nav">
+                        <li><a href="./欢迎页面.html" >网站首页</a></li>
+                        <li><a href="./18-商品管理.html" >商品页面</a></li>
+                        <li><a href="./cart.html">购物车</a></li>
+                        <li><a href="./个人信息主页.html">我的信息</a></li>
+                        <li><a href="">关于其他</a></li>
+                        <li><a href="./客服.html">联系我们</a></li>
+                    </ul>  
+                    </div>
+
+                </el-header>
+                <el-container>
+                  <el-aside width="150px">
+                    <!-- 111 -->
+                    
+                          
+                          <el-menu
+                          active-text-color="#ffd04b"
+                          background-color="#b5c0cc"
+                          class="el-menu-vertical-demo"
+                          default-active="2"
+                          text-color="#fff"
+                          @open="handleOpen"
+                          @close="handleClose"
+                          >
+                            <!-- 菜单的第一项 -->
+                            <el-menu-item index="1">
+                              <template #title>
+                                <el-icon><User/></el-icon>
+                                <span><a href="./个人信息子页.html" target="main">个人信息</a></span>
+                              </template>
+                              
+                            </el-menu-item>
+                            <!-- 菜单的第二项 -->
+                            <el-menu-item index="2">
+                              <el-icon><Menusyy /></el-icon>
+                              <span><a href="./cart.html" target="main">我的购物车</a></span>
+                            </el-menu-item>
+
+                            <!-- 菜单的第三项 -->
+                            <el-menu-item index="2">
+                              <el-icon><Menusyy /></el-icon>
+                              <span><a href="./echarts.html" target="main">商品图表</a></span>
+                            </el-menu-item>
+
+
+
+                            <el-menu-item index="3" >
+                              <el-icon><Piechart/></el-icon>
+                              <span>购买记录</span>
+                            </el-menu-item>
+                            <el-menu-item index="4" >
+                                <el-icon><Piechart/></el-icon>
+                                <span>我的收藏</span>
+                              </el-menu-item>
+                              <el-menu-item index="5" >
+                                <el-icon><Piechart/></el-icon>
+                                <span>退款维权</span>
+                              </el-menu-item>
+                              <el-menu-item index="6" >
+                                <el-icon><Piechart/></el-icon>
+                                <span>我的足迹</span>
+                              </el-menu-item>
+                          </el-menu>
+                        
+
+                  </el-aside>
+
+                  <el-main class="CK1" >
+                    <!-- 内嵌窗口 -->
+                    <iframe name="main" src="./个人信息子页.html" width="110%" height="800px" class="CK2" frameborder="0"></iframe>
+                  </el-main>
+                  
+                </el-container>
+              </el-container>
+
+          
+          
+
+    </div>
+
+
+
+    
+    <script>
+        // 解构elmessage
+        const {ElMessage}=ElementPlus
+
+
+        const app =Vue.createApp({
+            data(){
+                return{
+                    
+                    
+                }
+                
+            },
+            methods:{
+                
+                
+            },
+            
+
+        })
+
+
+
+
+        // 想使用elementplus就要使用app.use()
+        app.component('User',ElementPlusIconsVue.User)
+        app.component('Menusyy',ElementPlusIconsVue.Menu)
+        app.component('Piechart',ElementPlusIconsVue.PieChart)
+
+
+
+        app.use(ElementPlus)
+        app.mount("#main")
+    </script>
+
+
+
+</body>
+</html>

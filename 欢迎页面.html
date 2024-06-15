@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎</title>
+    
+
+    <link rel="stylesheet" href="./huangying.css">
+
+    <!-- 引入VUE.JS文件 -->
+    <script src="../js/1.js"></script>
+    <script src="../js/axios.js"></script>
+
+    <!-- element的js代码 -->
+    <script src="../js/index.full.js"></script>
+    <!-- element的css代码 -->
+    <link rel="stylesheet" href="../js/index.css">
+    
+
+    <style>
+
+    /* 轮播图 */
+    .demonstration {
+    color: var(--el-text-color-secondary);
+    }
+
+    .el-carousel__item h3 {
+    color: #475669;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+    text-align: center;
+    }
+
+    .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n + 1) {
+    background-color: #d3dce6;
+    }
+    
+    /* TOP栏 */
+    .el-link {
+      margin-right: 8px;
+    }
+    .el-link .el-icon--right.el-icon {
+      vertical-align: text-bottom;
+    }
+
+
+    .el-col {
+          text-align: center;
+        }
+
+
+
+        #container {
+          height: 650px; /* 为了演示滚动效果，页面需要足够长 */
+          position: relative;
+          /* background: rgb(243, 175, 175); */
+        }
+        .imageContainer {
+          left: 2.5%;
+          position: absolute;
+          top: 70px; /* 初始位置在底部之外 */
+          opacity: 0; /* 初始透明度为0 */
+          transition: top 1.75s ease, opacity 2s ease; /* 添加过渡效果 */
+          display: flex;
+          justify-content: center;
+        }
+        .movingImage {
+          flex: 1;
+          width: 400px;
+          height: 450px;
+          margin-right: 5px; /* 图片之间的间距 */
+          margin-left: 5px; /* 图片之间的间距 */
+        }    
+        .IMG2 {
+          
+          width: 350px;
+          height: 350px;
+          
+        }    
+
+    </style>
+
+</head>
+<body>
+    
+    <!-- 第二步 创建视图容器（显示VUE中的内容的容器） -->
+    <div id="main"> 
+       
+
+      
+
+     <div class="container-fluid">
+            <!-- 第一行 -->
+            <!-- 背景图片 -->
+            <div class="row" id="TITLEO">
+                
+                <div class="col-md-12 TITLET" >
+
+                  <span class="T1">宜购网</span>
+                  <span class="T2">Shopping center</span>
+                  <span class="ZXBOX">欢迎:{{info.nickname}} &nbsp; <button class="ZXBUTTON" @click="outFn">注销</button></span>
+
+                  <div class="TITLE_LINK">
+                    <ul class="nav">
+                      <li><a href="" >网站首页</a></li>
+                      <li><a href="./18-商品管理.html" >商品页面</a></li>
+                      <li><a href="./cart.html">购物车</a></li>
+                      <li><a href="./个人信息主页.html">我的信息</a></li>
+                      <li><a href="">关于其他</a></li>
+                      <li><a href="./客服.html">联系客服</a></li>
+                  </ul>  
+                  </div>
+                 
+              </div>
+
+
+
+
+                <!-- 轮播图2 -->
+                <div class="block text-center">
+                    <el-carousel height="780px" motion-blur>
+                      <el-carousel-item v-for="(item, index) in items" :key="index">
+                        <!-- <h3 class="small justify-center" text="2xl">{{ item }}</h3> -->
+                        <img style="width: 100%;height: 100%;" :src="item.imageUrl" alt="图片">
+                      </el-carousel-item>
+                    </el-carousel>
+                  </div>
+                  <el-carousel
+                    height="200px"
+                    direction="vertical"
+                    motion-blur
+                    :autoplay="false"
+                  >
+
+            </div>
+      
+             <!-- 第二行 -->
+             <div class="TWO-CON">
+                <!-- 统计 -->
+                <el-row>
+                  <el-col :span="6">
+                    <el-statistic class="EL1" title="网站入住商家" :value="28500"/>
+                </el-col> 
+                <el-col :span="6">
+                  <el-statistic class="EL1" title="我们的会员数量" :value="4912000"/>
+                </el-col>
+                <el-col :span="6">
+                  <el-statistic class="EL1" title="累计成交数量" :value="18437230"/>
+                </el-col>
+                <el-col :span="6">
+                  <el-statistic class="EL1" title="网站成立日期" :value="2009-10-12"/>
+                </el-col>   
+
+                </el-row>
+            </div>
+
+
+            
+            <!-- 第三行 -->
+
+            <div id="container">
+              <!-- 标题 -->
+              <div class="T3">
+                  <span class="FL_SPAN1">商品分类</span><br>
+                  <span class="FL_SPAN2">category </span>
+              </div>
+              <br><br>
+              <br><br>
+              <!-- 图片 -->
+              <div class="imageContainer">
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/服装.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">男装女装Men's and women's clothing</span><br>
+                  <span>毛衣/内衣/运动/礼服/外套/衬衫/内裤/长裤</span>
+                </div>
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/美食.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">食品foodstuff</span><br>
+                  <span>粮油调味/中外酒类/营养辅食/休闲食品/婴儿食品</span>
+                </div>
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/家电.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">家电Appliances and appliances</span><br>
+                  <span>电视/空调/厨电/冰箱/洗衣机/影像娱乐</span>
+                </div>
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/娱乐.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">娱乐玩具Entertainment toys</span><br>
+                  <span>玩具潮玩/童车童床/网络游戏/体育运动</span>
+                </div>
+                
+              </div>
+              
+            </div>
+            <!-- <script>
+              window.addEventListener('scroll', function() {
+                var scrollDistance = window.scrollY;
+                
+                // 设置移动触发的滚动距离
+                var triggerDistance = 420;
+                var hideDistance = 1100;
+                if (scrollDistance > triggerDistance) {
+                  moveImages();
+                }
+                if (scrollDistance > hideDistance) {
+                  // hideImages();
+                }
+              });
+              var hasMoved = false;
+              function moveImages() {
+                
+                if (!hasMoved) { // 如果还没有触发过移动
+                  var T3=document.querySelector('.T3');
+                  var imageContainer = document.querySelector('.imageContainer');
+                  // 移动图片容器向上100px
+                  var imageTOP = imageContainer.offsetTop;
+                  var T3TOP = T3.offsetTop;
+                  imageContainer.style.top = (imageTOP + 100) + "px";
+                  T3.style.top=(T3TOP + 100) + "px";
+                  // 设置透明度为1（完全不透明）
+                  imageContainer.style.opacity = '1';
+                  T3.style.opacity='1';
+                  hasMoved = true; // 设置标志为已触发过移动
+                }
+              }
+              function hideImages() {
+                var imageContainer = document.querySelector('.imageContainer');
+                // 设置透明度为0（完全透明），图片消失
+                imageContainer.style.opacity = '0';
+              }
+            </script> -->
+
+            <!-- 第三行下 -->
+            <div id="container2">
+              <!-- 图片 -->
+              <div class="imageContainer2">
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/美妆.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">美妆Beauty tools</span><br>
+                  <span>香水彩妆/男士护肤/洗发护理/面部护肤/珠宝首饰</span>
+                </div>
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/家具.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">家具furniture</span><br>
+                  <span>全屋家具/厨房家具/装修设计/家具饰品/儿童家具</span>
+                </div>
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/图书.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">图书Books</span><br>
+                  <span>文学小说/儿童绘本/教材教辅/中外名著</span>
+                </div>
+                <div class="movingImage">
+                  <img class="IMG2" src="./img/电子器件.jpg" alt="Moving Image 1">
+                  <br>
+                  <span class="FL_Title">Electronics</span><br>
+                  <span>电脑整机/电脑配件/电子元件/网络产品/机械设备</span>
+                </div>
+                
+              </div>
+              
+            </div>
+            <script>
+              window.addEventListener('scroll', function() {
+                var scrollDistance = window.scrollY;
+                
+                // 设置移动触发的滚动距离
+                var triggerDistance = 420;
+                var hideDistance = 600;
+                if (scrollDistance > triggerDistance) {
+                  moveImages();
+                }
+                if (scrollDistance > hideDistance) {
+                  moveImages2();
+                }
+              });
+              var hasMoved = false;
+              var hasMoved2 = false;
+              function moveImages() {
+                
+                if (!hasMoved) { // 如果还没有触发过移动
+                  var T3=document.querySelector('.T3');
+                  var imageContainer = document.querySelector('.imageContainer');
+                  // 移动图片容器向上100px
+                  var imageTOP = imageContainer.offsetTop;
+                  var T3TOP = T3.offsetTop;
+                  imageContainer.style.top = (imageTOP + 100) + "px";
+                  T3.style.top=(T3TOP + 100) + "px";
+                  // 设置透明度为1（完全不透明）
+                  imageContainer.style.opacity = '1';
+                  T3.style.opacity='1';
+                  hasMoved = true; // 设置标志为已触发过移动
+                }
+              }
+              function moveImages2() {
+                if (!hasMoved2) { // 如果还没有触发过移动
+                  // var T32=document.querySelector('.T32');
+                  var imageContainer2 = document.querySelector('.imageContainer2');
+                  // 移动图片容器向上100px
+                  var imageTOP2 = imageContainer2.offsetTop;
+                  // var T3TOP2 = T32.offsetTop;
+                  imageContainer2.style.top = (imageTOP2 + 100) + "px";
+                  // T32.style.top=(T3TOP2 + 100) + "px";
+                  // 设置透明度为1（完全不透明）
+                  imageContainer2.style.opacity = '1';
+                  // T32.style.opacity='1';
+                  hasMoved2 = true; // 设置标志为已触发过移动
+                }
+              }
+            </script>
+
+            <br>
+
+            
+
+            <!-- 第四行 -->
+            <div class="FOUR-CON">
+              <!-- 收缩栏 -->
+              <br>
+              <div class="demo-collapse">
+                <el-collapse v-model="activeNames" @change="handleChange">
+                  <el-collapse-item title="我们有广泛的产品选择和清晰的优惠活动：" name="1">
+                    <div style="color: #475669;font-size: 16px;">
+                      详细描述：购物网站提供了广泛的产品选择，涵盖了各种品类和价格范围的商品，满足不同用户的需求和偏好。通过与多个供应商合作或拥有自己的商品库存，<br>
+                      购物网站可以确保用户可以找到他们想要的任何产品，从而提高用户满意度和购买转化率。此外，不断更新和扩展产品选择也可以吸引用户重复访问网站，增加用户忠诚度和留存率
+                    </div>
+                    <br>
+                    <div style="color: #475669;font-size: 16px;">
+                      详细描述：购物网站经常提供各种优惠活动、促销折扣和特价商品，吸引用户进行购买并增加销售额。这些优惠可以包括限时折扣、满减优惠、买赠活动等，<br>为用户提供更具吸引力的购物体验。通过不断更新和推出新的优惠活动，购物网站可以促进用户的购买决策，并提高用户对网站的忠诚度和参与度。
+                    </div>
+                  </el-collapse-item>
+                  <el-collapse-item title="个性化推荐和建议" name="2">
+                    <div style="color: #475669;font-size: 16px;">
+                      购物网站利用个性化算法和用户行为数据，向用户提供定制的产品推荐和购买建议。通过分析用户的浏览历史、购买记录和兴趣偏好，购物网站可以向用户展示与其喜好相关的产品，
+                    </div>
+                    <br>
+                    <div style="color: #475669;font-size: 16px;">
+                      提高用户对网站的参与度和购买意愿。个性化推荐不仅可以增加销售额和转化率，还可以改善用户体验，使用户感到更加满意和重视。
+                    </div>
+                  </el-collapse-item>
+                  <el-collapse-item title="安全的支付和信息保护" name="3">
+                    <div style="color: #475669;font-size: 16px;">
+                      购物网站提供社交互动功能和用户评价系统，让用户可以分享购物体验、交流产品信息和参与社区讨论。通过用户生成的内容和社交分享，购物网站可以增强用户参与感和社交互动性，提高用户对产品的信任度和购买意愿。<br>
+                    </div>
+                    <br>
+                    <div style="color: #475669;font-size: 16px;">
+                     购物网站提供安全可靠的支付系统和保护用户信息的措施，保障用户的交易安全和个人隐私。通过采用加密技术、安全的支付网关和严格的数据保护措施，购物网站可以
+                      确保用户的支付信息和个人信息不受未经授权的访问和盗窃。<br>
+                    </div>
+                  </el-collapse-item>
+                  <el-collapse-item title="优秀的客户服务和售后支持" name="4">
+                    <div style="color: #475669;font-size: 16px;">
+                      详细描述：购物网站提供多样化的支付方式，包括信用卡支付、支付宝、微信支付、银行转账等，满足用户的不同支付习惯和需求。通过提供多种支付选项，购物网站可以扩大用户群体，降低购买障碍，提高交易成功率。
+                    </div>
+                    <br>
+                    <div style="color: #475669;font-size: 16px;">
+                      此外，安全可靠的支付系统也可以增加用户的信任感，促进购物网站的销售增长
+                    </div>
+                  </el-collapse-item>
+                </el-collapse>
+              </div>
+             
+            </div>
+            <div> 
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>  
+              <br>
+              <br>
+              <br>
+              <br> 
+            </div>
+           
+            <!-- <footer>部分 -->
+          <div class="bg_b">
+            <div class="wrapper f_zx">
+                <p>与我们携手，让您的品牌闪耀全球舞台！加入我们，开启成功之旅！成为我们团队的一部分，共同创造商业奇迹！加入我们，与行业领袖并肩前行！</p>
+                <a>立即咨询</a>
+            </div>
+            
+
+          </div>
+
+        <footer>
+            <div class="wrapper footerBox">
+                <div class="footerLeft">
+                    
+                    <p>Copyright ® 2012 - 2023</p>
+                    <p>All Rights Reserved.  KANwan.cccWAC</p>
+                    <p>通过采用加密技术、安全的支付网关和严格的数据保护措施，购物网站可以确保用户的支付信息和个人信息不受未经授权的访问和盗窃</p>
+                    <p>杭州市 余杭区 晴悦有限公司</p>
+                    <p>购物，从未如此简单和愉快！品质保证，满足您的每一个购物需求！与我们一起，创造无与伦比的购物体验！</p>
+                </div>
+                <!-- <div class="footerRight">
+                    
+                    <p>关注我们的微信公众号</p>
+                </div> -->
+                
+            </div>
+        </footer>
+        <br>
+
+        </div>
+
+        <!-- main结束 -->
+        </div>
+     
+        
+    <script>
+        // 解构elmessage
+        const {ElMessage}=ElementPlus
+        
+        const app =Vue.createApp({
+            // 第四部 创建变量
+            data(){
+                return{
+                  items: [
+                    { imageUrl: './img/轮播图1.jpg' },
+                    { imageUrl: './img/轮播图2.jpg' },
+                    { imageUrl: './img/轮播图3.jpg' },
+                    { imageUrl: './img/轮播图4.jpg' }
+                  ],
+                  activeNames: '1' ,
+                  // 初始状态为展开
+                  info:{},
+                }
+            },
+            mounted(){
+              var that=this
+              // 拿到存的用户id和token
+              const{token,userid}=localStorage
+              console.log(token,userid)
+              console.log("111");
+              if(userid==null){
+                ElMessage.error('亲~请登录后再查询个人信息偶')
+              }
+              axios.get("http://localhost:8888/users/info?id="+userid,
+                    {headers:{"Content-Type":'application/x-www-form-urlencoded',"authorization":token}}
+                  ).then(function (res) {
+                      console.log(res)
+                      // 将接口中的数据拿到后赋值给data中的info对象
+                      that.info=res.data.info
+              })
+            },
+            methods: {
+              outFn() {
+              const { userid, token } = localStorage
+              console.log(userid)
+              const data = { id: userid }
+              axios.get("http://localhost:8888/users/logout?id="+ userid, {
+                headers: { "Content-Type": 'application/x-www-form-urlencoded', "authorization": token }
+              }).then(function (res) {
+                console.log(res)
+                if (res.data.code == 1) {
+                  alert("注销成功,即将退回到登录")
+                  location.href = "./join.html"
+                }
+              })
+            }
+          },
+            
+        // 结束
+        })
+
+    
+        
+        // 第五部
+      
+        app.use(ElementPlus)
+        app.mount("#main")
+    </script>
+    <!-- 收缩栏 -->
+    <!-- <script lang="ts" setup>
+    import { ref } from 'vue'
+    
+    const activeName = ref('1')
+    </script> -->
+
+    <script src="./欢迎.js"></script>
+</body>
+</html>
