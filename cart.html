@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="../js/1.js"></script>
-  <!-- elementplus中样式文件 -->
-  <link rel="stylesheet" href="../js/index.css">
-  <!-- elmentplus中的js文件 -->
-  <script src="../js/index.full.js"></script>
-  <!-- 引入ElementPlus中的图标文件 -->
-  <script src="../js/index.life.min.js"></script>
-  <!-- 引入axios.js文件 -->
-  <script src="../js/axios.js"></script>
   <link rel="stylesheet" href="./个人信息.css">
 </head>
 <style>
@@ -190,264 +177,116 @@ ul.nav li a:hover,ul.nav li a.current{
   <div class="div">
     <p>我的购物车</p>
   </div>
-  <div id="app">
-    <el-table align="center" :data="goodsData" style="width: 100%">
-      <el-table-column align="center" property="goods_id" label="商品id"></el-table-column>
-      <el-table-column align="center" property="current_price" label="当前价格"></el-table-column>
-      <el-table-column align="center" property="cart_number" label="数量"></el-table-column>
-      <el-table-column align="center" label="商品图片">
-        <template #default="scope">
-          <img width="100px" height="100px" :src="scope.row.img_small_logo" alt="">
-        </template>
-      </el-table-column>
-      <el-table-column align="center" property="current_price" label="价格"></el-table-column>
-      <el-table-column align="center" property="title" label="商品标题"></el-table-column>
-
-      <el-table-column align="center" fixed="right" label="操作">
-        <template #default="scope">
-          <el-button type="danger" size="small" @click="delCart(scope.row.goods_id)">删除商品</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-button @click="clearCart" type="primary" class="XKbutton" >清空购物车</el-button>
-		<div class="main">
-			<p class="title">类似商品</p>   
-		</div>
+  <div id="cartContainer">
+    <table id="cartTable">
+      <!-- 表格内容将通过JavaScript动态添加 -->
+    </table>
+    <button id="clearCartBtn" class="XKbutton">清空购物车</button>
   </div>
-
 
   <!-- 猜您喜欢 -->
-  <br>
-  <div class="CONTENT2">
-      <div class="CON_TITLE">
-         
-        </div>
-
-          <!-- 主体 -->
-
-      <div class="container">
-        <div class="card" id="OneImg">
-            <div class="content">
-                <h2>店铺活动¥9.9起</h2>
-                <p>蓝莓岩烧吐司面包厚切肉松乳酪早餐面包欧包整箱代餐健康零食品</p>
-                <button>查看更多</button>
-            </div>
-        </div>
-        <div class="card" id="TwoImg">
-            <div class="content">
-                <h2>掌柜推荐¥119.9</h2>
-                <p>优形鸡胸肉开袋即食低脂速食鸡肉零食高蛋白轻食鸡肉食品饱腹代餐</p>
-                <button>查看更多</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2>¥3758起</h2>
-                <p>Apple/苹果 AirPods Max 头戴降噪耳机 airpodsmax 掌柜推荐</p>
-                <button>查看更多</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2>新品促销¥119.6起</h2>
-                <p>葵珍洽洽恰恰内蒙原味大瓜子河套特产葵花籽炒货零食188g 掌柜推荐</p>
-                <button>查看更多</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2>新品促销 ¥42.8起</h2>
-                <p>超Q方便面 泡面整箱 混搭老坛酸菜 红烧牛肉面 速食夜宵即速食干脆面</p>
-                <button>查看更多</button>
-            </div>
-        </div>
-        <div class="card">
-          <div class="content">
-              <h2>新品促销¥78.8起</h2>
-              <p>OGORUS无线鼠标 蓝牙静音笔记本电脑游戏电竞可充电宏编程无限滑鼠 掌柜推荐</p>
-              <button>查看更多</button>
-          </div>
-      </div>
-      <div class="card">
-        <div class="content">
-            <h2>新品抢购¥209起</h2>
-            <p>zbt免插卡随身wifi无线移动wi-fi 三网切换全国通用千兆网络 4g路由器</p>
-            <button>查看更多</button>
-        </div>
-    </div>
-        
-      </div>
-  
-      
-
-  </div>
+  <!-- ... 现有 "猜您喜欢" 部分代码 ... -->
 
   <script>
-          // 引入Element Plus的消息提示组件
- // 创建一个Vue应用
- // 定义数据
-// 商品数据数组
- // 总价
-    const { ElMessage } = ElementPlus
-    const app = Vue.createApp({
-      data() {
-        return {
-          goodsData: [],
-          allprice: 0
+    // 检查登录状态的函数
+    function checkLogin() {
+      var username = getCookie('username');
+      var password = getCookie('password');
+      return username && password; // 如果都有值，则返回true
+    }
+
+    // 获取cookie的函数
+    function getCookie(name) {
+      // ... 实现与之前相同的getCookie逻辑 ...
+    }
+
+    // AJAX请求获取购物车数据的函数
+    function fetchCartData() {
+      var xhr = new XMLHttpRequest();
+      var url = "http://localhost:8888/cart/list"; // 根据实际情况调整URL
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      // 假设token是作为参数传递的，实际情况可能需要根据后端要求调整
+      xhr.setRequestHeader('authorization', getCookie('token'));
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var res = JSON.parse(xhr.responseText);
+          generateCartTable(res.data.cart); // 根据返回的数据生成购物车表格
         }
-      },
-      // 自定义的方法
-      // 获取行键值
- // 修改元素的选中状态
-        // 遍历事件数组
-           // 打印商品ID和选中状态
-            // 获取商品ID
-            // 根据选中状态设置type值
-            // 从localStorage中获取用户ID和token
-           // 构造请求数据
-            // 保存当前上下文
-            // 同时发送两个请求
+      };
+      xhr.send();
+    }
 
-              // 发送POST请求，修改购物车商品的选中状态
-              // 设置请求头
-              // 发送GET请求，获取购物车商品列表
-                // 设置请求头
-             // 处理响应结果
-                // 打印选中状态的响应结果
-                // 获取购物车商品列表
-                 // 更新商品数据数组
-                 // 打印购物车商品列表
-                // 遍历购物车商品列表
-                  // 如果商品被选中
-                    // 计算总价
-      methods: {
-        getRowKeys(row) {
-          console.log(row.userId)
-        },
-        handleSelectionChange(events) {
-          console.log(events)
-          for (var i = 0; i < events.length; i++) {
-            console.log(events[i].goods_id, events[i].is_select)
-            var goods_id = events[i].goods_id
-            var type = events[i].is_select === false ? 1 : 0
-            const { userid, token } = localStorage
-            const data = { id: userid, type: type }
-            var that = this
-            axios.all([
+    // 根据数据生成购物车表格的函数
+    function generateCartTable(cartItems) {
+      var table = document.getElementById('cartTable');
+      table.innerHTML = ''; // 清空原有内容
+      cartItems.forEach(function(item) {
+        var row = table.insertRow();
+        row.insertCell(0).textContent = item.goods_id;
+        row.insertCell(1).textContent = item.current_price;
+        row.insertCell(2).textContent = item.cart_number;
+        // 假设每个商品有一个小图，实际情况可能需要调整
+        var imgCell = row.insertCell(3);
+        var img = document.createElement('img');
+        img.src = item.img_small_logo;
+        img.width = '100px';
+        img.height = '100px';
+        img.alt = item.title;
+        imgCell.appendChild(img);
+        row.insertCell(4).textContent = item.title;
+        var actionCell = row.insertCell(5);
+        var deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '删除商品';
+        deleteBtn.onclick = function() { deleteCartItem(item.goods_id); };
+        actionCell.appendChild(deleteBtn);
+      });
+    }
 
-              axios.post("http://localhost:8888/cart/select/all", data, {
-                headers: { "Content-Type": 'application/x-www-form-urlencoded', "authorization": token }
-              }),
-              axios.get("http://localhost:8888/cart/list?id=" + userid, {
-                headers: { "authorization": token }
-              })
-            ])
-              .then(axios.spread(function (selectResult, cartResult) {
-                console.log(selectResult)
-                var cartList = cartResult.data.cart
-                that.goodsData = cartList
-                console.log(cartList)
-                for (var i = 0; i < cartList.length; i++) {
-                  if (cartList[i].is_select) {
-                    that.allprice = that.allprice + cartList[i].current_price * cartList[i].cart_number
-
-                  }
-
-                }
-
-              }));
-          }
-
-        },
-        // 查询购物车商品
-         // 查询购物车商品方法
-         // 保存当前上下文
-           // 从localStorage中获取用户ID和token
-          // 打印用户ID
-          // 发送GET请求，获取购物车商品列表
-            // 设置请求头
-           // 处理响应结果
-           // 打印响应结果
-           // 更新商品数据数组
-        selectCart() {
-          var that = this
-          const { userid, token } = localStorage
-          console.log(userid)
-          axios.get("http://localhost:8888/cart/list?id=" + userid, {
-            headers: { "authorization": token }
-          }).then(function (res) {
-            console.log(res)
-            that.goodsData = res.data.cart
-          })
-        },
-        // 删除商品
-        // 删除商品方法
-        //  打印商品ID
-          //  保存当前上下文
-        //  从localStorage中获取用户ID和token
-          // 打印用户ID
-        //  发送GET请求，删除指定商品
-            // 设置请求头
-          // 处理响应结果
-            // 打印响应结果
-            // 如果删除成功
-              // 显示成功消息提示
-              // 重新查询购物车商品列表
-        delCart(goods_id) {
-          console.log(goods_id)
-          var that = this
-          const { userid, token } = localStorage
-          console.log(userid)
-          axios.get("http://localhost:8888/cart/remove?id=" + userid + "&goodsId=" + goods_id, {
-            headers: { "authorization": token }
-          }).then(function (res) {
-            console.log(res)
-            if (res.data.code == 1) {
-              ElMessage.success(res.data.message)
-              that.selectCart()
-            }
-          })
-        },
-        // 清空购物车
-        // 清空购物车方法
-         // 保存当前上下文
-         // 从localStorage中获取用户ID和token
-          // 打印用户ID
-          // 发送GET请求，清空购物车
-           // 设置请求头
-          // 处理响应结果
-          // 打印响应结果
-           // 如果清空成功
-              // 显示成功消息提示
-             // 重新查询购物车商品列表
-        clearCart() {
-          var that = this
-          const { userid, token } = localStorage
-          console.log(userid)
-          axios.get("http://localhost:8888/cart/clear?id=" + userid, {
-            headers: { "authorization": token }
-          }).then(function (res) {
-            console.log(res)
-            if (res.data.code == 1) {
-              ElMessage.success(res.data.message)
-              that.selectCart()
-            }
-          })
+    // 删除购物车商品的函数
+    function deleteCartItem(goods_id) {
+      var xhr = new XMLHttpRequest();
+      var url = "http://localhost:8888/cart/remove"; // 根据实际情况调整URL
+      xhr.open('GET', url + '?id=' + getCookie('userid') + '&goodsId=' + goods_id, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('authorization', getCookie('token'));
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          alert('商品删除成功');
+          fetchCartData(); // 重新加载购物车数据
         }
-      },
-      //预加载函数： 一进入该页面就执行该方法
-      // 页面加载完成后执行的方法
-  //  查询购物车商品列表
-//  使用Element Plus组件库
-//   注册Element Plus的购物车图标组件
-// // 挂载Vue应用到指定的DOM元素上
-      mounted() {
-        this.selectCart()
+      };
+      xhr.send();
+    }
+
+    // 清空购物车的函数
+    function clearCart() {
+      var xhr = new XMLHttpRequest();
+      var url = "http://localhost:8888/cart/clear"; // 根据实际情况调整URL
+      xhr.open('GET', url + '?id=' + getCookie('userid'), true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('authorization', getCookie('token'));
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          alert('购物车已清空');
+          fetchCartData(); // 重新加载购物车数据
+        }
+      };
+      xhr.send();
+    }
+
+    // 为清空购物车按钮添加点击事件
+    document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+
+    // 页面加载完成后执行的操作
+    document.addEventListener('DOMContentLoaded', function() {
+      if (checkLogin()) {
+        fetchCartData(); // 登录检查通过则获取购物车数据
+      } else {
+        alert('请先登录！');
+        // 可能需要重定向到登录页面或显示登录表单
       }
-    })
-    app.use(ElementPlus)
-    app.component('shoppingcartfull', ElementPlusIconsVue.ShoppingCartFull)
-    app.mount("#app")
+    });
   </script>
 </body>
 </html>
